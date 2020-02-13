@@ -1,10 +1,20 @@
 from room import Room
 from player import Player
+from item import Item
 
+
+
+#Items
+item = {
+    'map':  Item("\nMap", "In this room there is a map."),
+    'flashlight':  Item("\nFlashlight", "In this room there is a flashlight")
+}
+
+map = Item("map", "You found a map")
 # Declare all the rooms
 
 room = {
-    'outside':  Room("Outside Cave Entrance",
+    'outside':  Room("\nOutside Cave Entrance",
                      "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
@@ -33,13 +43,24 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+# room['foyer'] = {map.description}
+
+
+
+
+# Link rooms with items
+
+room['foyer'].items = ['map']
+room['narrow'].items =['flashlight']
 
 #
 # Main
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player("Bob", room["outside"])
+player = Player(input("What is your name?"), room["outside"])
+
+print(f"Welcome, {player.name}")
 # Write a loop that:
 #
 # * Prints the current room name
@@ -51,37 +72,86 @@ player = Player("Bob", room["outside"])
 #
 # If the user enters "q", quit the game.
 
-directions = ["n", "s", "e", "w"]
-
 quit = False
+directions = "nsew"
+controls = [1234]
 
+def player_controls(user_pick):
+
+    if user_pick == "1":
+        if len(player.room.items) == 0:
+            print("Room has no items")
+        else:
+            new_item = input("what item would you like?")
+            player.get_item(new_item)
+            print(player.room.items)
+
+    elif user_pick == "2":
+        while True:
+            user_input = input("[n] North  [s] South   [e] East [w] West [c] change action\nInput:")
+
+
+            if user_input == "q":
+                print("you quit")
+                break
+
+            elif user_input in directions:
+                player.movement(user_input)
+                print(player.room)
+
+           
+
+            elif not user_input in directions:
+                print("Please enter valid input")
+
+
+
+
+
+
+
+
+
+
+user_pick=""
 # Write a loop that
 while not quit:
     
     # Prints the current room name
     print(player.room)
+    
+
 
 
 #  Waits for user input and decides what to do.
-    user_input = input("[n] North  [s] South   [e] East [w] West   [q] Quit\nInput:")
+    print("Choose your next move: [1] to search room. [walk]To explore.  [9] Quit\nInput:")
 
+    user_pick = input("Pick")
 
 # If the user enters "q", quit the game.
-    if user_input == "q":
+    if user_pick == "q":
         quit = True
         print("you quit")
+
+        
+
+    else:
+        player_controls(user_pick)
         
 
     # Print an error message if the movement isn't allowed.
-    elif not user_input in directions:
-        print("Please enter valid input")
+    # elif not user_input in directions:
+    #     print("Please enter valid input")
 
-    
-    elif user_input in directions:
-        player.movement(user_input)
-
-    
+        
 # If the user enters a cardinal direction, attempt to move to the room there.
+    # elif user_input in directions:
+    #     player.movement(user_input)
+
+    
+        
+
+
         
     
 
