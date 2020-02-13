@@ -74,11 +74,11 @@ print(f"Welcome, {player.name}")
 
 quit = False
 directions = "nsew"
-controls = [1234]
+
 
 def player_controls(user_pick):
 
-    if user_pick == "1":
+    if user_pick == "search":
         if len(player.room.items) == 0:
             print("Room has no items")
         else:
@@ -86,9 +86,9 @@ def player_controls(user_pick):
             player.get_item(new_item)
             print(player.room.items)
 
-    elif user_pick == "2":
+    elif user_pick == "walk":
         while True:
-            user_input = input("[n] North  [s] South   [e] East [w] West [c] change action\nInput:")
+            user_input = input("[n] North  [s] South   [e] East [w] West [q] change action\nInput:")
 
 
             if user_input == "q":
@@ -124,9 +124,9 @@ while not quit:
 
 
 #  Waits for user input and decides what to do.
-    print("Choose your next move: [1] to search room. [walk]To explore.  [9] Quit\nInput:")
+    print("Choose your next move: [search] to search room. [walk]To explore.  [q] Quit\nInput:")
 
-    user_pick = input("Pick")
+    user_pick = input("")
 
 # If the user enters "q", quit the game.
     if user_pick == "q":

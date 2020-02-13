@@ -22,4 +22,5 @@ class Player:
             self.room.items.remove(item)
             print(f"you now have {self.playeritems}")
         else:
-            print("no items")
+            print("There are no items")
+
