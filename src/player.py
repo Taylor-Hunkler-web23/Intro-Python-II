@@ -24,3 +24,12 @@ class Player:
         else:
             print("There are no items")
 
+
+    def drop_item(self, item):
+        if item in self.playeritems:
+            print(f"You dropped {item}")
+            self.playeritems.remove(item)
+            self.room.items.append(item)
+            print(f"you now have {self.playeritems}")
+        else:
+            print("There are no items")
