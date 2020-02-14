@@ -10,7 +10,6 @@ item = {
     'flashlight':  Item("\nFlashlight", "In this room there is a flashlight")
 }
 
-map = Item("map", "You found a map")
 # Declare all the rooms
 
 room = {
@@ -76,57 +75,58 @@ quit = False
 directions = "nsew"
 
 
-def player_controls(user_pick):
+# def player_controls(user_pick):
 
     
-    # if user_pick.split(" ")[0] == "get":
-    #     player.get_item(user_pick.split(" ")[1])
+#     # if user_pick.split(" ")[0] == "get":
+#     #     player.get_item(user_pick.split(" ")[1])
      
 
-    # elif user_pick.split(" ")[0] == "drop":
-    #     player.drop_item(user_pick.split(" ")[1])
-    #     print(player.playeritems)
+#     # elif user_pick.split(" ")[0] == "drop":
+#     #     player.drop_item(user_pick.split(" ")[1])
+#     #     print(player.playeritems)
        
 
-    if user_pick == "search":
-        if len(player.room.roomitems) == 0:
-            print("Room has no items")
-        else:
-            new_item = input("what item would you like?")
-            player.get_item(new_item)
-            print(f"Your current items are {player.playeritems}")
+#     if user_pick == "search":
+#         if len(player.room.roomitems) == 0:
+#             print("Room has no items")
+#         else:
+#             new_item = input("what item would you like?")
+#             player.get_item(new_item)
+#             print(f"Your current items are {player.playeritems}")
+            
 
-    elif user_pick == "drop":
-        if len(player.playeritems) == 0:
-            print("No items to drop")
-        else:
-            drop_item = input("what item would you drop?")
-            print(f"Your current items are {player.playeritems}")
-            player.drop_item(drop_item)
-            print(player.playeritems)
+#     elif user_pick == "drop":
+#         if len(player.playeritems) == 0:
+#             print("No items to drop")
+#         else:
+#             drop_item = input("what item would you drop?")
+#             print(f"Your current items are {player.playeritems}")
+#             player.drop_item(drop_item)
+#             print(player.playeritems)
 
-    elif user_pick == "walk":
-        while True:
-            user_input = input("\n[n] to move North  [s] to move South   [e] to move East [w] to move West [q] to change action\nInput:")
+#     elif user_pick == "walk":
+#         while True:
+#             user_input = input("\n[n] to move North  [s] to move South   [e] to move East [w] to move West [q] to change action\nInput:")
 
 
-            if user_input == "q":
-                print("you quit")
-                break
+#             if user_input == "q":
+#                 print("you quit")
+#                 break
 
-            elif user_input in directions:
-                player.movement(user_input)
-                print(f"\nYou have entered the {player.room.name}")
-                print(player.room.description)
-                print(player.room.roomitems)
+#             elif user_input in directions:
+#                 player.movement(user_input)
+#                 print(f"\nYou have entered the {player.room.name}")
+#                 print(player.room.description)
+#                 print(player.room.roomitems)
 
            
 
-            elif not user_input in directions:
-                print("Please enter valid input")
+#             elif not user_input in directions:
+#                 print("Please enter valid input")
 
-    else:
-        print("Invalid input")
+#     else:
+#         print("Invalid input")
 
 
 
@@ -142,25 +142,50 @@ user_pick=""
 while not quit:
     
     # Prints the current room name
-    # print(player.room)
+    print(player.room)
     
 
 
 
 #  Waits for user input and decides what to do.
-    print("\nChoose your next move: Type[search] to search room. Type [walk]To explore. Type [drop] To drop item.  [q] Quit\n Input:")
+    # print("\nChoose your next move: Type[search] to search room. Type [walk]To explore. Type [drop] To drop item.  [q] Quit\n Input:")
 
-    user_pick = input("")
+    user_pick =  input("\n Choose your next move. [n] to move North  [s] to move South   [e] to move East [w] to move West\nto get drop room items [get item] [drop item]\nInput:")
 
 # If the user enters "q", quit the game.
     if user_pick == "q":
         quit = True
         print("you quit")
 
+    # user_input = input("\n[n] to move North  [s] to move South   [e] to move East [w] to move West [q] to change action\nInput:")
+
+
+        
+
+    elif user_pick in directions:
+        player.movement(user_pick)
+        print(f"\nYou have entered the {player.room.name}")
+        print(player.room.description)
+        print(player.room.roomitems)
+
+
+      
+    elif user_pick.split(" ")[0] == "get":
+        player.get_item(user_pick.split(" ")[1])
+     
+
+    elif user_pick.split(" ")[0] == "drop":
+        player.drop_item(user_pick.split(" ")[1])
+        print(player.playeritems)
+
+    elif user_pick == "i":
+        print(f"Current items you have: {player.playeritems}")
+
+
         
 
     else:
-        player_controls(user_pick)
+        print("Invalid input")
         
 
     # Print an error message if the movement isn't allowed.

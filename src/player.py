@@ -16,13 +16,13 @@ class Player:
             print("No room there, try again")
 
     def get_item(self, new_item):
-        # if item in self.room.items:
+        if new_item in self.room.roomitems:
             print(f"You got {new_item}")
             self.playeritems.append(new_item)
             self.room.roomitems.remove(new_item)
             print(f"you now have {self.playeritems}")
-        # else:
-        #     print("There are no items")
+        else:
+            print("There are no items with that name")
 
 
     def drop_item(self, item):
@@ -32,4 +32,4 @@ class Player:
             self.room.roomitems.append(item)
             print(f"you now have {self.playeritems}")
         else:
-            print("There are no items")
+            print("There are no items with that name")
