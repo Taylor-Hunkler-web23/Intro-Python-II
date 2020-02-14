@@ -125,6 +125,9 @@ def player_controls(user_pick):
             elif not user_input in directions:
                 print("Please enter valid input")
 
+    else:
+        print("Invalid input")
+
 
 
 
