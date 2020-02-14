@@ -11,25 +11,25 @@ class Player:
         new_room = self.room.go_to_room(direction)
         if new_room is not None:
             self.room = new_room
-            print("Going to next room")
+            
         else:
             print("No room there, try again")
 
-    def get_item(self, item):
-        if item in self.room.items:
-            print(f"You got {item}")
-            self.playeritems.append(item)
-            self.room.items.remove(item)
+    def get_item(self, new_item):
+        # if item in self.room.items:
+            print(f"You got {new_item}")
+            self.playeritems.append(new_item)
+            self.room.roomitems.remove(new_item)
             print(f"you now have {self.playeritems}")
-        else:
-            print("There are no items")
+        # else:
+        #     print("There are no items")
 
 
     def drop_item(self, item):
         if item in self.playeritems:
             print(f"You dropped {item}")
             self.playeritems.remove(item)
-            self.room.items.append(item)
+            self.room.roomitems.append(item)
             print(f"you now have {self.playeritems}")
         else:
             print("There are no items")
